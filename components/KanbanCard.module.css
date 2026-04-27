@@ -1,0 +1,64 @@
+.card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 11px;
+  margin-bottom: 5px;
+  cursor: grab;
+  user-select: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.card:hover {
+  border-color: var(--border2);
+  background: var(--surface3);
+}
+.card:active { cursor: grabbing; }
+
+.cardOverlay {
+  cursor: grabbing;
+  border-color: var(--accent-border) !important;
+  box-shadow: 0 0 0 1px var(--accent-border), 0 16px 40px rgba(0,0,0,0.5) !important;
+  background: var(--surface3) !important;
+  transform: rotate(1.2deg) scale(1.025);
+}
+
+.labelBar {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.45;
+  margin-bottom: 3px;
+}
+
+.desc {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.due {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  margin-top: 5px;
+}
+.dueOverdue { color: var(--red); }
+.dueToday   { color: var(--amber); }

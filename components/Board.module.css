@@ -1,0 +1,44 @@
+.boardWrap {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.board {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 16px 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+.board::-webkit-scrollbar { height: 5px; }
+.board::-webkit-scrollbar-track { background: transparent; }
+.board::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+.addColBtn {
+  flex-shrink: 0;
+  width: 230px;
+  height: 44px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+.addColBtn:hover {
+  border-color: var(--accent-border);
+  color: var(--accent-h);
+  background: var(--accent-dim);
+}
