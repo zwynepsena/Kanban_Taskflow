@@ -1,6 +1,6 @@
 # TaskFlow — Kanban Proje Yönetim Tahtası
 
-Trello benzeri, sürükle-bırak destekli kanban uygulaması.
+Trello benzeri, sürükle-bırak destekli kanban uygulaması. Kayıt/giriş, çoklu board, sütun ve kart yönetimi.
 
 ## Stack
 
@@ -9,6 +9,19 @@ Trello benzeri, sürükle-bırak destekli kanban uygulaması.
 - **@dnd-kit** — sürükle-bırak (kart + sütun)
 - **Zustand** — state yönetimi, localStorage persist
 - **CSS Modules** — scoped styling
+
+## Özellikler
+
+- **Auth** — Email + kullanıcı adı + şifre ile kayıt/giriş
+  - Şifre kuralları: min 8 karakter, 1 büyük harf, 1 rakam
+  - Şifre gücü göstergesi (Weak → Strong)
+- **Username** — Header'da tıklanarak düzenlenebilir
+- **Board kurulum ekranı** — İlk girişte board oluşturma adımı, hazır şablonlarla
+- **Multi-board** — Kullanıcıya özel birden fazla board
+- **Sütun CRUD** — Ekle, yeniden adlandır, sil, sürükle-bırak ile sırala
+- **Kart CRUD** — Ekle, düzenle, sil, sütunlar arası sürükle-bırak
+- **Etiket + son tarih** — Kart başına label ve due date
+- **Mobil desteği** — Touch sensor ile
 
 ## Yerel Çalıştırma
 
@@ -20,37 +33,12 @@ npm run dev
 
 ## Vercel Deploy
 
+GitHub'a push edip [vercel.com](https://vercel.com) dashboard'dan import et — Next.js otomatik algılanır.
+
 ```bash
 npm install -g vercel
 vercel
 ```
-
-Ya da GitHub'a push edip Vercel dashboard'dan import et — otomatik algılar.
-
-## Mimari Kararları
-
-### Sürükle-Bırak: @dnd-kit
-- react-beautiful-dnd artık bakımda değil
-- dnd-kit: modern, tree-shakeable, TypeScript-first
-- TouchSensor ile mobil desteği kutudan çıkar
-- PointerSensor activation distance: 5px — yanlışlıkla tetiklenmez
-
-### Sıralama Persistansı
-Her kart ve sütunun `order: number` alanı var.
-- Sürükleme bitince Zustand store güncellenir
-- Zustand `persist` middleware → localStorage'a yazar
-- Sayfa yenilense de sıra korunur
-
-### Kapsam Kararları (48h)
-✅ Auth (localStorage hash)  
-✅ Multi-board  
-✅ Sütun CRUD + sürükleme  
-✅ Kart CRUD + sürükleme (sütunlar arası)  
-✅ Etiket + son tarih  
-✅ Mobil touch desteği  
-❌ Gerçek backend/DB (Supabase eklenebilir)  
-❌ Çoklu kullanıcı aynı anda  
-❌ Aktivite geçmişi  
 
 ## Klasör Yapısı
 
@@ -58,6 +46,19 @@ Her kart ve sütunun `order: number` alanı var.
 app/          Next.js App Router sayfaları
 components/   React bileşenleri + CSS Modules
 lib/          Yardımcı fonksiyonlar, sabitler
-store/        Zustand store
-types/        TypeScript tipleri
+store/        Zustand store (localStorage persist)
+types/        TypeScript tip tanımları
 ```
+
+## Mimari Notlar
+
+**Sürükle-Bırak:** `@dnd-kit` — react-beautiful-dnd artık bakımda değil; dnd-kit TypeScript-first, tree-shakeable ve mobil uyumlu.
+
+**Sıralama:** Her kart ve sütunun `order: number` alanı var. Sürükleme bitince Zustand store güncellenir, `persist` middleware localStorage'a yazar — sayfa yenilense de sıra korunur.
+
+**Auth:** Gerçek backend yok, kullanıcı verileri ve şifre hash'leri localStorage'da tutulur. Zustand persist ile board/kart verisi de tarayıcıda saklanır.
+
+**Kapsam dışı:**
+- Gerçek backend / veritabanı (Supabase eklenebilir)
+- Çoklu kullanıcı eş zamanlı çalışma
+- Aktivite geçmişi
